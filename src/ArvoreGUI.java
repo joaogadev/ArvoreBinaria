@@ -103,5 +103,4 @@ public class ArvoreGUI extends JFrame {
     public static void main(String[] args) {
         new ArvoreGUI().setVisible(true);
     }
-
 }
