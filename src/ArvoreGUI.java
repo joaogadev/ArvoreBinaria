@@ -19,7 +19,7 @@ public class ArvoreGUI extends JFrame {
     public ArvoreGUI() {
 
         setTitle("Árvore Binária");
-        setSize(400,400);
+        setSize(600,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -45,7 +45,6 @@ public class ArvoreGUI extends JFrame {
         labelInternos = new JLabel("Nós internos: ");
 
         info.add(new JScrollPane(areaResultado));
-
         info.add(labelRaiz);
         info.add(labelAltura);
         info.add(labelFolhas);
@@ -55,8 +54,18 @@ public class ArvoreGUI extends JFrame {
 
         // Painel estrutural da árvore
         painel = new PainelArvore(arvore);
-        painel.setPreferredSize(new Dimension(400, 400));
-        add(painel, BorderLayout.CENTER);
+        painel.setPreferredSize(new Dimension(200, 100));
+
+        //Scroll envolvendo o painel da árvore
+        JScrollPane scroll = new JScrollPane(painel);
+        scroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+
+        add(scroll, BorderLayout.CENTER);
 
         botaoInserir.addActionListener(e -> {
 
@@ -75,9 +84,19 @@ public class ArvoreGUI extends JFrame {
             labelAltura.setText("Altura: " + arvore.altura(arvore.raiz));
             labelFolhas.setText("Folhas: " + arvore.contarFolhas(arvore.raiz));
             labelInternos.setText("Nós internos: " + arvore.contarInternos(arvore.raiz));
-
             campoNumero.setText("");
-            painel.repaint();
+
+            //Faz o painel crescer com base aumentam os nós
+            Dimension d = painel.getPreferredSize();
+            painel.setPreferredSize(
+                    new Dimension(
+                            d.width + 100,
+                            d.height + 100
+                    )
+            );
+
+            painel.revalidate(); //atualiza o scroll
+            painel.repaint(); //Redesenha a árvore após inserir
         });
     }
 
