@@ -1,6 +1,29 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Arvore {
 
     No raiz;
+
+    // Método para salvar a árvore em um formato parênteses aninhados
+    public void salvarParenteses(No no, BufferedWriter bw) throws IOException {
+
+        if (no == null) {
+            bw.write("()");
+            return;
+        }
+
+        bw.write(no.valor + "");
+
+        bw.write("(");
+        salvarParenteses(no.esquerda, bw);
+        bw.write(")");
+
+        bw.write("(");
+        salvarParenteses(no.direita, bw);
+        bw.write(")");
+    }
 
     No inserir(No raiz, int valor) {
 
