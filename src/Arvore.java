@@ -25,6 +25,25 @@ public class Arvore {
         bw.write(")");
     }
 
+    // Método para salvar a árvore em formato parênteses aninhados em um arquivo
+    public void salvarEmArquivo(String nomeArquivo) {
+
+        try {
+
+            BufferedWriter bw =
+                    new BufferedWriter(
+                            new FileWriter(nomeArquivo)
+                    );
+
+            salvarParenteses(raiz, bw);
+
+            bw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     No inserir(No raiz, int valor) {
 
         if (raiz == null) {
